@@ -1,0 +1,78 @@
+<mxfile host="app.diagrams.net" agent="airline-assignment" type="device">
+  <diagram id="booking-state-machine" name="Booking State Machine">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="826" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="title" value="Booking Lifecycle — States and Seat Inventory Effects" style="text;html=1;align=left;verticalAlign=middle;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="700" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="A hold is a booking in HELD status, not a separate entity — one table, one lifecycle, and confirm and cancel operate uniformly on both." style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="40" y="46" width="1000" height="20" as="geometry" />
+        </mxCell>
+
+        <mxCell id="start" value="" style="ellipse;html=1;fillColor=#333333;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="80" y="250" width="30" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="held" value="HELD&lt;br&gt;&lt;font style='font-size:9px'&gt;hold_expires_at set&lt;br&gt;seats status = HELD&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;fontStyle=1;fontSize=12;arcSize=20;" vertex="1" parent="1">
+          <mxGeometry x="300" y="130" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="confirmed" value="CONFIRMED&lt;br&gt;&lt;font style='font-size:9px'&gt;hold_expires_at = NULL&lt;br&gt;seats status = BOOKED&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;fontStyle=1;fontSize=12;arcSize=20;" vertex="1" parent="1">
+          <mxGeometry x="620" y="245" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="cancelled" value="CANCELLED&lt;br&gt;&lt;font style='font-size:9px'&gt;seat_assignment rows DELETED&lt;br&gt;passenger rows retained&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=2;fontStyle=1;fontSize=12;arcSize=20;" vertex="1" parent="1">
+          <mxGeometry x="900" y="130" width="200" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="expired" value="EXPIRED&lt;br&gt;&lt;font style='font-size:9px'&gt;seat_assignment rows DELETED&lt;br&gt;passenger rows retained&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;strokeWidth=2;fontStyle=1;fontSize=12;arcSize=20;" vertex="1" parent="1">
+          <mxGeometry x="900" y="400" width="200" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="t1" value="POST /api/bookings/holds&lt;br&gt;&lt;font style='font-size:9px'&gt;claimSeats(..., HELD, now + ttl)&lt;/font&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#d6b656;strokeWidth=2;fontSize=10;verticalAlign=bottom;" edge="1" parent="1" source="start" target="held">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="t2" value="POST /api/bookings&lt;br&gt;&lt;font style='font-size:9px'&gt;claimSeats(..., BOOKED, null)&lt;/font&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#82b366;strokeWidth=2;fontSize=10;verticalAlign=bottom;" edge="1" parent="1" source="start" target="confirmed">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="95" y="285" />
+              <mxPoint x="400" y="285" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="t3" value="POST /{pnr}/confirm&lt;br&gt;&lt;font style='font-size:9px'&gt;in-place UPDATE of the same rows&lt;/font&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#82b366;strokeWidth=2;fontSize=10;verticalAlign=bottom;" edge="1" parent="1" source="held" target="confirmed">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="t4" value="POST /{pnr}/cancel" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#b85450;strokeWidth=2;fontSize=10;verticalAlign=bottom;" edge="1" parent="1" source="held" target="cancelled">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="t5" value="POST /{pnr}/cancel" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#b85450;strokeWidth=2;fontSize=10;verticalAlign=bottom;" edge="1" parent="1" source="confirmed" target="cancelled">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="t6" value="hold_expires_at lapses&lt;br&gt;&lt;font style='font-size:9px'&gt;HoldExpiryJob.sweep()&lt;/font&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#666666;strokeWidth=2;dashed=1;fontSize=10;verticalAlign=bottom;" edge="1" parent="1" source="held" target="expired">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="390" y="440" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="rejNote" value="&lt;b&gt;Rejected transitions&lt;/b&gt;&lt;br&gt;&lt;br&gt;confirm from CONFIRMED · CANCELLED · EXPIRED&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;409 BOOKING_NOT_CONFIRMABLE&lt;br&gt;&lt;br&gt;confirm when hold_expires_at has lapsed&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;409 HOLD_EXPIRED&lt;br&gt;&lt;br&gt;cancel from CANCELLED · EXPIRED&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;409 BOOKING_NOT_CANCELLABLE&lt;br&gt;&lt;br&gt;&lt;i&gt;Chosen over a silently idempotent 200 so a client&lt;br&gt;learns its view of the booking is stale.&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="300" y="520" width="330" height="175" as="geometry" />
+        </mxCell>
+
+        <mxCell id="flipNote" value="&lt;b&gt;Why HELD to CONFIRMED is an UPDATE, never delete-then-insert&lt;/b&gt;&lt;br&gt;&lt;br&gt;ux_seat_active covers both HELD and BOOKED, so updating the&lt;br&gt;existing rows in place means the seat is never momentarily free.&lt;br&gt;Delete-then-insert opens a window in which a competing booking&lt;br&gt;can take the seat between the two statements.&lt;br&gt;&lt;br&gt;The test asserts the seat_assignment row ids are unchanged&lt;br&gt;across the flip, precisely to catch this." style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="660" y="520" width="440" height="140" as="geometry" />
+        </mxCell>
+
+        <mxCell id="sweepNote" value="&lt;b&gt;The sweep is cleanup, not correctness&lt;/b&gt;&lt;br&gt;A lapsed hold already reads as free: search&lt;br&gt;counts only rows with expires_at &amp;gt; now(), and&lt;br&gt;the booking path purges lapsed holds inside its&lt;br&gt;own transaction. A seat is rebookable the&lt;br&gt;instant its hold lapses, whether or not the job&lt;br&gt;has ever run." style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="660" y="370" width="210" height="140" as="geometry" />
+        </mxCell>
+
+        <mxCell id="amputateNote" value="&lt;b&gt;Removable by design&lt;/b&gt;&lt;br&gt;If time runs short, deleting the HELD state, the two&lt;br&gt;hold endpoints and the sweep job leaves the rest of&lt;br&gt;the model untouched — no schema change, no rewrite." style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;fillColor=#f5f5f5;strokeColor=#999999;dashed=1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="40" y="130" width="230" height="90" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

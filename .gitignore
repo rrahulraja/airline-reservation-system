@@ -1,0 +1,38 @@
+# Build output
+target/
+build/
+out/
+*.class
+*.jar
+!.mvn/wrapper/maven-wrapper.jar
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+.settings/
+.classpath
+.project
+nbproject/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs and local env
+*.log
+logs/
+.env
+.env.local
+
+# Local Docker volumes
+pgdata/
+
+# draw.io backups
+*.drawio.bkp
+*.drawio.dtmp
+
+# Internal design/planning working documents - not part of the deliverable
+docs/superpowers/
