@@ -1,0 +1,34 @@
+services:
+  db:
+    image: postgres:16
+    container_name: airline-db
+    environment:
+      POSTGRES_DB: airline
+      POSTGRES_USER: airline
+      POSTGRES_PASSWORD: airline
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U airline -d airline"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  app:
+    build: .
+    container_name: airline-app
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/airline
+      SPRING_DATASOURCE_USERNAME: airline
+      SPRING_DATASOURCE_PASSWORD: airline
+      JWT_SECRET: compose-dev-signing-key-replace-in-production
+    ports:
+      - "8080:8080"
+
+volumes:
+  pgdata:
