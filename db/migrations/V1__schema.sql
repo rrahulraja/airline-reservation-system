@@ -13,7 +13,7 @@
 
 CREATE TABLE airport (
     id        BIGSERIAL    PRIMARY KEY,
-    iata_code CHAR(3)      NOT NULL UNIQUE,
+    iata_code VARCHAR(3)   NOT NULL UNIQUE,
     name      VARCHAR(120) NOT NULL,
     city      VARCHAR(80)  NOT NULL,
     country   VARCHAR(80)  NOT NULL
@@ -81,7 +81,7 @@ CREATE INDEX ix_instance_date ON flight_instance (flight_date);
 
 CREATE TABLE booking (
     id                 BIGSERIAL    PRIMARY KEY,
-    pnr                CHAR(6)      NOT NULL UNIQUE,
+    pnr                VARCHAR(6)   NOT NULL UNIQUE,
     flight_instance_id BIGINT       NOT NULL REFERENCES flight_instance (id),
     status             VARCHAR(16)  NOT NULL
                          CHECK (status IN ('HELD', 'CONFIRMED', 'CANCELLED', 'EXPIRED')),
