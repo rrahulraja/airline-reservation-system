@@ -1,0 +1,107 @@
+### Airline Reservation System - end-to-end walkthrough
+### Run top to bottom. XY101 operates Monday, Wednesday and Friday; adjust the dates
+### below to a matching weekday inside the 365-day booking window.
+
+@baseUrl = http://localhost:8080
+@flightDate = 2026-10-07
+
+### 1. Log in as admin
+# @name adminLogin
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{"username": "admin", "password": "admin123"}
+
+> {% client.global.set("adminToken", response.body.token); %}
+
+### 2. Create a schedule (admin only)
+POST {{baseUrl}}/api/admin/schedules
+Content-Type: application/json
+Authorization: Bearer {{adminToken}}
+
+{
+  "flightNumber": "XY505",
+  "origin": "BOM",
+  "destination": "SIN",
+  "departureTime": "02:15",
+  "arrivalTime": "10:30",
+  "arrivalDayOffset": 0,
+  "aircraftCode": "A320-01",
+  "daysOfOperation": ["MONDAY", "THURSDAY"],
+  "validFrom": "2026-10-04",
+  "validTo": "2027-09-30"
+}
+
+### 3. Log in as customer
+# @name customerLogin
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{"username": "customer", "password": "customer123"}
+
+> {% client.global.set("customerToken", response.body.token); %}
+
+### 4. Search flights
+GET {{baseUrl}}/api/flights/search?origin=DXB&destination=LHR&date={{flightDate}}
+Authorization: Bearer {{customerToken}}
+
+### 5. Seat map for one flight
+GET {{baseUrl}}/api/flights/XY101/seat-map?date={{flightDate}}
+Authorization: Bearer {{customerToken}}
+
+### 6. Book two seats
+# @name booking
+POST {{baseUrl}}/api/bookings
+Content-Type: application/json
+Authorization: Bearer {{customerToken}}
+
+{
+  "flightNumber": "XY101",
+  "flightDate": "{{flightDate}}",
+  "contactName": "R Raja",
+  "passengers": [
+    {"fullName": "R Raja", "seatLabel": "12A"},
+    {"fullName": "A Sharma", "seatLabel": "12B"}
+  ]
+}
+
+> {% client.global.set("pnr", response.body.pnr); %}
+
+### 7. Try the same seat again - expect 409 SEAT_UNAVAILABLE with details ["12A"]
+POST {{baseUrl}}/api/bookings
+Content-Type: application/json
+Authorization: Bearer {{customerToken}}
+
+{
+  "flightNumber": "XY101",
+  "flightDate": "{{flightDate}}",
+  "contactName": "Someone Else",
+  "passengers": [{"fullName": "Someone Else", "seatLabel": "12A"}]
+}
+
+### 8. Fetch the booking by PNR
+GET {{baseUrl}}/api/bookings/{{pnr}}
+Authorization: Bearer {{customerToken}}
+
+### 9. Cancel it - seats are released immediately
+POST {{baseUrl}}/api/bookings/{{pnr}}/cancel
+Authorization: Bearer {{customerToken}}
+
+### 10. Hold a seat for five minutes
+# @name hold
+POST {{baseUrl}}/api/bookings/holds
+Content-Type: application/json
+Authorization: Bearer {{customerToken}}
+
+{
+  "flightNumber": "XY101",
+  "flightDate": "{{flightDate}}",
+  "contactName": "Browser",
+  "passengers": [{"fullName": "Browser", "seatLabel": "14C"}]
+}
+
+> {% client.global.set("holdPnr", response.body.pnr); %}
+
+### 11. Confirm the hold - flips the same seat rows to BOOKED
+POST {{baseUrl}}/api/bookings/{{holdPnr}}/confirm
+Authorization: Bearer {{customerToken}}
