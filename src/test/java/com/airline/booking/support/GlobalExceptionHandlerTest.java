@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.context.annotation.Import;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import com.airline.booking.security.JwtService;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,6 +44,13 @@ public class GlobalExceptionHandlerTest {
 
   @Autowired
   private MockMvc mockMvc;
+
+  /**
+   * JwtAuthFilter is a Filter, so @WebMvcTest instantiates it, but JwtService is a
+   * @Service, which @WebMvcTest excludes. Without this the context fails to load.
+   */
+  @MockitoBean
+  private JwtService jwtService;
 
   @Test
   @DisplayName("domain exception renders its code and the status carried by that code")
