@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1069" height="774" viewBox="0 0 1069 774">
+<defs>
+<marker id="arrow-block" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"/></marker>
+<marker id="arrow-open" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10" fill="none" stroke="context-stroke" stroke-width="1.5"/></marker>
+</defs>
+<rect width="1069" height="774" fill="#ffffff"/>
+<text x="48.0" y="40.9" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="18.0" fill="#111111" text-anchor="start" font-weight="bold">Airline Ticketing System — Component Architecture</text>
+<text x="48.0" y="59.6" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="11.0" fill="#555555" text-anchor="start">Strict one-direction layering: controller to service to repository. Services are the only transaction boundary.</text>
+<rect x="260.0" y="80.0" width="780.0" height="80.0" rx="0" fill="none" stroke="#999999" stroke-width="1" opacity="1.0" stroke-dasharray="8 6"/>
+<text x="268.0" y="94.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#666666" text-anchor="start">web tier / cross-cutting</text>
+<rect x="40.0" y="190.0" width="1000.0" height="85.0" rx="0" fill="none" stroke="#999999" stroke-width="1" opacity="1.0" stroke-dasharray="8 6"/>
+<text x="48.0" y="204.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#666666" text-anchor="start">controllers — bind and validate DTOs only, no transactions</text>
+<rect x="40.0" y="305.0" width="1000.0" height="90.0" rx="0" fill="none" stroke="#999999" stroke-width="1" opacity="1.0" stroke-dasharray="8 6"/>
+<text x="48.0" y="319.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#666666" text-anchor="start">domain services — @Transactional boundary starts here</text>
+<rect x="40.0" y="540.0" width="1000.0" height="85.0" rx="0" fill="none" stroke="#999999" stroke-width="1" opacity="1.0" stroke-dasharray="8 6"/>
+<text x="48.0" y="554.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#666666" text-anchor="start">repositories</text>
+<rect x="60.0" y="100.0" width="160.0" height="50.0" rx="8" fill="#f5f5f5" stroke="#666666" stroke-width="1" opacity="1.0"/>
+<text x="140.0" y="120.8" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle">HTTP client</text>
+<text x="140.0" y="137.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle">Swagger UI</text>
+<rect x="280.0" y="103.0" width="160.0" height="45.0" rx="8" fill="#fff2cc" stroke="#d6b656" stroke-width="1" opacity="1.0"/>
+<text x="360.0" y="121.3" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle">RequestIdFilter</text>
+<text x="360.0" y="137.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle">MDC request id</text>
+<rect x="460.0" y="103.0" width="160.0" height="45.0" rx="8" fill="#fff2cc" stroke="#d6b656" stroke-width="1" opacity="1.0"/>
+<text x="540.0" y="121.3" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle">JwtAuthFilter</text>
+<text x="540.0" y="137.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle">ADMIN | CUSTOMER</text>
+<rect x="640.0" y="103.0" width="200.0" height="45.0" rx="8" fill="#fff2cc" stroke="#d6b656" stroke-width="1" opacity="1.0"/>
+<text x="740.0" y="113.2" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle">GlobalExceptionHandler</text>
+<text x="740.0" y="129.4" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle">the only place a status is</text>
+<text x="740.0" y="145.6" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle">chosen</text>
+<rect x="860.0" y="103.0" width="160.0" height="45.0" rx="8" fill="#fff2cc" stroke="#d6b656" stroke-width="1" opacity="1.0"/>
+<text x="940.0" y="113.2" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle">SecurityConfig</text>
+<text x="940.0" y="129.4" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle">entry point + denied</text>
+<text x="940.0" y="145.6" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle">handler</text>
+<rect x="60.0" y="215.0" width="170.0" height="45.0" rx="8" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1" opacity="1.0"/>
+<text x="145.0" y="241.4" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle">AuthController</text>
+<rect x="250.0" y="215.0" width="220.0" height="45.0" rx="8" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1" opacity="1.0"/>
+<text x="360.0" y="241.4" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle">AdminScheduleController</text>
+<rect x="490.0" y="215.0" width="200.0" height="45.0" rx="8" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1" opacity="1.0"/>
+<text x="590.0" y="241.4" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle">FlightController</text>
+<rect x="710.0" y="215.0" width="200.0" height="45.0" rx="8" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1" opacity="1.0"/>
+<text x="810.0" y="241.4" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle">BookingController</text>
+<rect x="60.0" y="330.0" width="160.0" height="45.0" rx="8" fill="#d5e8d4" stroke="#82b366" stroke-width="1" opacity="1.0"/>
+<text x="140.0" y="356.4" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle">ScheduleService</text>
+<rect x="240.0" y="330.0" width="170.0" height="45.0" rx="8" fill="#d5e8d4" stroke="#82b366" stroke-width="1" opacity="1.0"/>
+<text x="325.0" y="356.4" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle">FlightSearchService</text>
+<rect x="430.0" y="330.0" width="150.0" height="45.0" rx="8" fill="#d5e8d4" stroke="#82b366" stroke-width="1" opacity="1.0"/>
+<text x="505.0" y="356.4" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle">SeatMapService</text>
+<rect x="600.0" y="330.0" width="140.0" height="45.0" rx="8" fill="#d5e8d4" stroke="#82b366" stroke-width="1" opacity="1.0"/>
+<text x="670.0" y="356.4" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle">BookingService</text>
+<rect x="760.0" y="330.0" width="120.0" height="45.0" rx="8" fill="#d5e8d4" stroke="#82b366" stroke-width="1" opacity="1.0"/>
+<text x="820.0" y="356.4" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle">HoldService</text>
+<rect x="900.0" y="330.0" width="125.0" height="45.0" rx="8" fill="#ffe6cc" stroke="#d79b00" stroke-width="2" opacity="1.0"/>
+<text x="962.5" y="356.4" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle" font-weight="bold">SeatClaimService</text>
+<text x="962.5" y="379.8" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="9.0" fill="#b85450" text-anchor="middle">the one seat-claim primitive</text>
+<text x="962.5" y="391.9" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="9.0" fill="#b85450" text-anchor="middle">all three booking entry points</text>
+<text x="962.5" y="404.1" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="9.0" fill="#b85450" text-anchor="middle">share</text>
+<rect x="420.0" y="440.0" width="260.0" height="55.0" rx="8" fill="#ffe6cc" stroke="#d79b00" stroke-width="2" opacity="1.0"/>
+<text x="550.0" y="463.3" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle" font-weight="bold">FlightInstanceResolver</text>
+<text x="550.0" y="479.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle" font-weight="bold">resolveOrCreate(schedule, date)</text>
+<text x="708.0" y="448.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#b85450" text-anchor="start">THE SEAM: booking reaches flight only through this</text>
+<text x="708.0" y="461.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#b85450" text-anchor="start">interface.</text>
+<text x="708.0" y="475.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#b85450" text-anchor="start">Swapping lazy generation for eager materialization changes</text>
+<text x="708.0" y="488.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#b85450" text-anchor="start">this class and nothing else.</text>
+<rect x="60.0" y="563.0" width="175.0" height="45.0" rx="8" fill="#e1d5e7" stroke="#9673a6" stroke-width="1" opacity="1.0"/>
+<text x="147.5" y="589.4" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle">ScheduleRepository</text>
+<rect x="255.0" y="563.0" width="215.0" height="45.0" rx="8" fill="#e1d5e7" stroke="#9673a6" stroke-width="1" opacity="1.0"/>
+<text x="362.5" y="581.3" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle">FlightSearchRepository</text>
+<text x="362.5" y="597.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle">the only native SQL</text>
+<rect x="490.0" y="563.0" width="200.0" height="45.0" rx="8" fill="#e1d5e7" stroke="#9673a6" stroke-width="1" opacity="1.0"/>
+<text x="590.0" y="581.3" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle">FlightInstanceRepository</text>
+<text x="590.0" y="597.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle">ON CONFLICT DO NOTHING</text>
+<rect x="710.0" y="563.0" width="310.0" height="45.0" rx="8" fill="#e1d5e7" stroke="#9673a6" stroke-width="1" opacity="1.0"/>
+<text x="865.0" y="581.3" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle">BookingRepository · PassengerRepository ·</text>
+<text x="865.0" y="597.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle">SeatAssignmentRepository</text>
+<path d="M 420.0 679.0 A 130.0 14.0 0 0 1 680.0 679.0 L 680.0 731.0 A 130.0 14.0 0 0 1 420.0 731.0 Z" fill="#f8cecc" stroke="#b85450" stroke-width="1"/>
+<path d="M 420.0 679.0 A 130.0 14.0 0 0 0 680.0 679.0" fill="none" stroke="#b85450" stroke-width="1"/>
+<text x="550.0" y="708.9" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle" font-weight="bold">PostgreSQL 16</text>
+<rect x="710.0" y="660.0" width="310.0" height="90.0" rx="0" fill="#fff2cc" stroke="#d6b656" stroke-width="1" opacity="1.0"/>
+<text x="718.0" y="674.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">ux_seat_active — PARTIAL UNIQUE INDEX</text>
+<text x="718.0" y="687.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">(flight_instance_id, seat_label)</text>
+<text x="718.0" y="701.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">WHERE status IN (&#x27;HELD&#x27;,&#x27;BOOKED&#x27;)</text>
+<text x="718.0" y="728.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">Double booking is impossible at the storage layer,</text>
+<text x="718.0" y="741.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">independent of application correctness.</text>
+<rect x="60.0" y="660.0" width="230.0" height="65.0" rx="8" fill="#d5e8d4" stroke="#82b366" stroke-width="1" opacity="1.0" stroke-dasharray="8 6"/>
+<text x="175.0" y="672.1" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle">HoldExpiryJob</text>
+<text x="175.0" y="688.3" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle">@Scheduled sweep — cleanup only,</text>
+<text x="175.0" y="704.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle">never load-bearing for</text>
+<text x="175.0" y="720.7" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle">correctness</text>
+<polyline points="140.0,150.0 140.0,182.5 145.0,182.5 145.0,215.0" fill="none" stroke="#333333" stroke-width="1" marker-end="url(#arrow-block)"/>
+<polyline points="220.0,125.0 280.0,125.5" fill="none" stroke="#d6b656" stroke-width="1" stroke-dasharray="7 5" marker-end="url(#arrow-block)"/>
+<polyline points="250.0,237.5 235.0,237.5 235.0,352.5 220.0,352.5" fill="none" stroke="#333333" stroke-width="1" marker-end="url(#arrow-block)"/>
+<polyline points="490.0,237.5 450.0,237.5 450.0,352.5 410.0,352.5" fill="none" stroke="#333333" stroke-width="1" marker-end="url(#arrow-block)"/>
+<polyline points="590.0,260.0 590.0,295.0 505.0,295.0 505.0,330.0" fill="none" stroke="#333333" stroke-width="1" marker-end="url(#arrow-block)"/>
+<polyline points="710.0,237.5 725.0,237.5 725.0,352.5 740.0,352.5" fill="none" stroke="#333333" stroke-width="1" marker-end="url(#arrow-block)"/>
+<polyline points="810.0,260.0 810.0,295.0 820.0,295.0 820.0,330.0" fill="none" stroke="#333333" stroke-width="1" marker-end="url(#arrow-block)"/>
+<polyline points="740.0,352.5 900.0,352.5" fill="none" stroke="#d79b00" stroke-width="2" marker-end="url(#arrow-block)"/>
+<polyline points="880.0,352.5 900.0,352.5" fill="none" stroke="#d79b00" stroke-width="2" marker-end="url(#arrow-block)"/>
+<polyline points="600.0,352.5 640.0,352.5 640.0,467.5 680.0,467.5" fill="none" stroke="#d79b00" stroke-width="2" marker-end="url(#arrow-block)"/>
+<text x="640.0" y="404.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="9.0" fill="none" stroke="#ffffff" stroke-width="4" stroke-linejoin="round" text-anchor="middle">only path from booking to flight</text>
+<text x="640.0" y="404.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="9.0" fill="#333333" text-anchor="middle">only path from booking to flight</text>
+<polyline points="550.0,495.0 550.0,529.0 590.0,529.0 590.0,563.0" fill="none" stroke="#333333" stroke-width="1" marker-end="url(#arrow-block)"/>
+<polyline points="325.0,375.0 325.0,469.0 362.5,469.0 362.5,563.0" fill="none" stroke="#333333" stroke-width="1" marker-end="url(#arrow-block)"/>
+<polyline points="140.0,375.0 140.0,469.0 147.5,469.0 147.5,563.0" fill="none" stroke="#333333" stroke-width="1" marker-end="url(#arrow-block)"/>
+<polyline points="962.5,375.0 962.5,469.0 865.0,469.0 865.0,563.0" fill="none" stroke="#333333" stroke-width="1" marker-end="url(#arrow-block)"/>
+<polyline points="470.0,585.5 445.0,585.5 445.0,705.0 420.0,705.0" fill="none" stroke="#333333" stroke-width="1" marker-end="url(#arrow-block)"/>
+<polyline points="590.0,608.0 590.0,636.5 550.0,636.5 550.0,665.0" fill="none" stroke="#333333" stroke-width="1" marker-end="url(#arrow-block)"/>
+<polyline points="710.0,585.5 695.0,585.5 695.0,705.0 680.0,705.0" fill="none" stroke="#333333" stroke-width="1" marker-end="url(#arrow-block)"/>
+<polyline points="290.0,692.5 500.0,692.5 500.0,585.5 710.0,585.5" fill="none" stroke="#333333" stroke-width="1" stroke-dasharray="7 5" marker-end="url(#arrow-block)"/>
+<polyline points="235.0,585.5 327.5,585.5 327.5,705.0 420.0,705.0" fill="none" stroke="#333333" stroke-width="1" marker-end="url(#arrow-block)"/>
+</svg>

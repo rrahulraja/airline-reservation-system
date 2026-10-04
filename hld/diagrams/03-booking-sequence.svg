@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1594" height="814" viewBox="0 0 1594 814">
+<defs>
+<marker id="arrow-block" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"/></marker>
+<marker id="arrow-open" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10" fill="none" stroke="context-stroke" stroke-width="1.5"/></marker>
+</defs>
+<rect width="1594" height="814" fill="#ffffff"/>
+<text x="48.0" y="40.9" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="18.0" fill="#111111" text-anchor="start" font-weight="bold">Booking Request Flow — POST /api/bookings</text>
+<text x="48.0" y="59.6" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="11.0" fill="#555555" text-anchor="start">Labels of the form A / B show the success path and the conflict path through the same code.</text>
+<rect x="440.0" y="215.0" width="790.0" height="500.0" rx="0" fill="none" stroke="#b85450" stroke-width="1" opacity="1.0" stroke-dasharray="8 6"/>
+<text x="835.0" y="711.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#b85450" text-anchor="middle">one @Transactional boundary — validation through seat insert. Any failure rolls back whole; a partial booking is impossible.</text>
+<rect x="25.0" y="90.0" width="170.0" height="40.0" rx="4" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<line x1="110.0" y1="130.0" x2="110.0" y2="790.0" stroke="#666666" stroke-width="1" stroke-dasharray="6 5"/>
+<text x="110.0" y="113.9" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle">Customer</text>
+<rect x="215.0" y="90.0" width="170.0" height="40.0" rx="4" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1"/>
+<line x1="300.0" y1="130.0" x2="300.0" y2="790.0" stroke="#6c8ebf" stroke-width="1" stroke-dasharray="6 5"/>
+<text x="300.0" y="113.9" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle">BookingController</text>
+<rect x="425.0" y="90.0" width="170.0" height="40.0" rx="4" fill="#d5e8d4" stroke="#82b366" stroke-width="1"/>
+<line x1="510.0" y1="130.0" x2="510.0" y2="790.0" stroke="#82b366" stroke-width="1" stroke-dasharray="6 5"/>
+<text x="510.0" y="113.9" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle">BookingService</text>
+<rect x="645.0" y="90.0" width="170.0" height="40.0" rx="4" fill="#ffe6cc" stroke="#d79b00" stroke-width="1"/>
+<line x1="730.0" y1="130.0" x2="730.0" y2="790.0" stroke="#d79b00" stroke-width="1" stroke-dasharray="6 5"/>
+<text x="730.0" y="113.9" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle">FlightInstanceResolver</text>
+<rect x="855.0" y="90.0" width="170.0" height="40.0" rx="4" fill="#ffe6cc" stroke="#d79b00" stroke-width="1"/>
+<line x1="940.0" y1="130.0" x2="940.0" y2="790.0" stroke="#d79b00" stroke-width="1" stroke-dasharray="6 5"/>
+<text x="940.0" y="113.9" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle">SeatClaimService</text>
+<rect x="1055.0" y="90.0" width="170.0" height="40.0" rx="4" fill="#f8cecc" stroke="#b85450" stroke-width="1"/>
+<line x1="1140.0" y1="130.0" x2="1140.0" y2="790.0" stroke="#b85450" stroke-width="1" stroke-dasharray="6 5"/>
+<text x="1140.0" y="113.9" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle">PostgreSQL</text>
+<rect x="1260.0" y="215.0" width="310.0" height="175.0" rx="0" fill="#d5e8d4" stroke="#82b366" stroke-width="1" opacity="1.0"/>
+<text x="1268.0" y="229.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">Validation order matters</text>
+<text x="1268.0" y="242.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">1. active schedule by flight number — 404</text>
+<text x="1268.0" y="256.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">2. date within [today, today+365] — 422</text>
+<text x="1268.0" y="269.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">3. day-of-week in mask, date in validity — 422</text>
+<text x="1268.0" y="283.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">4. departure not already past — 422</text>
+<text x="1268.0" y="296.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">5. normalize labels, uppercase and trim — 400</text>
+<text x="1268.0" y="310.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">6. labels valid for aircraft geometry — 400</text>
+<text x="1268.0" y="323.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">7. no duplicate label in request — 400</text>
+<text x="1268.0" y="337.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">8. seat count within 1..max-seats — 400</text>
+<text x="1268.0" y="350.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">9. passenger count equals seat count — 400</text>
+<text x="1268.0" y="377.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">Nothing is written until all nine pass.</text>
+<rect x="1260.0" y="520.0" width="310.0" height="195.0" rx="0" fill="#f8cecc" stroke="#b85450" stroke-width="2" opacity="1.0"/>
+<text x="1268.0" y="534.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">Why the explicit flush()</text>
+<text x="1268.0" y="561.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">Hibernate flushes at commit by default, and commit</text>
+<text x="1268.0" y="574.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">happens OUTSIDE the service method. Without an</text>
+<text x="1268.0" y="588.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">explicit flush inside the try block, the constraint</text>
+<text x="1268.0" y="601.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">violation escapes the catch and surfaces after the</text>
+<text x="1268.0" y="615.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">method returns — rendering 500 instead of 409.</text>
+<text x="1268.0" y="642.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">Flushing forces the INSERT to hit Postgres while</text>
+<text x="1268.0" y="655.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">the exception is still catchable. The constraint</text>
+<text x="1268.0" y="669.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">name is then read from PSQLException via</text>
+<text x="1268.0" y="682.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">getServerErrorMessage().getConstraint() and</text>
+<text x="1268.0" y="696.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">compared against &#x27;ux_seat_active&#x27;.</text>
+<rect x="1260.0" y="420.0" width="310.0" height="80.0" rx="0" fill="#ffe6cc" stroke="#d79b00" stroke-width="1" opacity="1.0"/>
+<text x="1268.0" y="434.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">Why labels are sorted</text>
+<text x="1268.0" y="447.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">Concurrent transactions claiming overlapping seat</text>
+<text x="1268.0" y="461.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">sets in differing orders deadlock on index tuples.</text>
+<text x="1268.0" y="474.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">Sorting gives every transaction the same</text>
+<text x="1268.0" y="488.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">acquisition order, removing that failure class.</text>
+<polyline points="110.0,165.0 300.0,165.0" fill="none" stroke="#333333" stroke-width="1" marker-end="url(#arrow-block)"/>
+<text x="205.0" y="159.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="none" stroke="#ffffff" stroke-width="4" stroke-linejoin="round" text-anchor="middle">POST /api/bookings</text>
+<text x="205.0" y="159.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#333333" text-anchor="middle">POST /api/bookings</text>
+<polyline points="300.0,205.0 510.0,205.0" fill="none" stroke="#333333" stroke-width="1" marker-end="url(#arrow-block)"/>
+<text x="405.0" y="199.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="none" stroke="#ffffff" stroke-width="4" stroke-linejoin="round" text-anchor="middle">create(request, userId)</text>
+<text x="405.0" y="199.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#333333" text-anchor="middle">create(request, userId)</text>
+<polyline points="510.0,250.0 600.0,250.0 600.0,282.0 510.0,282.0" fill="none" stroke="#82b366" stroke-width="1" marker-end="url(#arrow-block)"/>
+<text x="600.0" y="260.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="none" stroke="#ffffff" stroke-width="4" stroke-linejoin="round" text-anchor="middle">validate — 9 ordered checks</text>
+<text x="600.0" y="260.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#333333" text-anchor="middle">validate — 9 ordered checks</text>
+<polyline points="510.0,305.0 730.0,305.0" fill="none" stroke="#d79b00" stroke-width="1" marker-end="url(#arrow-block)"/>
+<text x="620.0" y="299.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="none" stroke="#ffffff" stroke-width="4" stroke-linejoin="round" text-anchor="middle">resolveOrCreate(schedule, date)</text>
+<text x="620.0" y="299.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#333333" text-anchor="middle">resolveOrCreate(schedule, date)</text>
+<polyline points="730.0,345.0 1140.0,345.0" fill="none" stroke="#d79b00" stroke-width="1" marker-end="url(#arrow-block)"/>
+<text x="935.0" y="339.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="none" stroke="#ffffff" stroke-width="4" stroke-linejoin="round" text-anchor="middle">INSERT flight_instance ... ON CONFLICT (schedule_id, flight_date) DO NOTHING</text>
+<text x="935.0" y="339.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#333333" text-anchor="middle">INSERT flight_instance ... ON CONFLICT (schedule_id, flight_date) DO NOTHING</text>
+<polyline points="1140.0,385.0 730.0,385.0" fill="none" stroke="#999999" stroke-width="1" stroke-dasharray="7 5" marker-end="url(#arrow-open)"/>
+<text x="935.0" y="379.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="none" stroke="#ffffff" stroke-width="4" stroke-linejoin="round" text-anchor="middle">SELECT — always finds a row</text>
+<text x="935.0" y="379.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#333333" text-anchor="middle">SELECT — always finds a row</text>
+<polyline points="730.0,425.0 510.0,425.0" fill="none" stroke="#999999" stroke-width="1" stroke-dasharray="7 5" marker-end="url(#arrow-open)"/>
+<text x="620.0" y="419.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="none" stroke="#ffffff" stroke-width="4" stroke-linejoin="round" text-anchor="middle">FlightInstance</text>
+<text x="620.0" y="419.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#333333" text-anchor="middle">FlightInstance</text>
+<polyline points="510.0,465.0 1140.0,465.0" fill="none" stroke="#333333" stroke-width="1" marker-end="url(#arrow-block)"/>
+<text x="825.0" y="459.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="none" stroke="#ffffff" stroke-width="4" stroke-linejoin="round" text-anchor="middle">DELETE lapsed HELD assignments for this instance</text>
+<text x="825.0" y="459.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#333333" text-anchor="middle">DELETE lapsed HELD assignments for this instance</text>
+<polyline points="510.0,505.0 1140.0,505.0" fill="none" stroke="#333333" stroke-width="1" marker-end="url(#arrow-block)"/>
+<text x="825.0" y="499.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="none" stroke="#ffffff" stroke-width="4" stroke-linejoin="round" text-anchor="middle">INSERT booking (CONFIRMED, pnr) + passenger rows</text>
+<text x="825.0" y="499.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#333333" text-anchor="middle">INSERT booking (CONFIRMED, pnr) + passenger rows</text>
+<polyline points="510.0,545.0 940.0,545.0" fill="none" stroke="#d79b00" stroke-width="2" marker-end="url(#arrow-block)"/>
+<text x="725.0" y="539.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="none" stroke="#ffffff" stroke-width="4" stroke-linejoin="round" text-anchor="middle">claimSeats(instance, booking, SORTED labels, BOOKED, null)</text>
+<text x="725.0" y="539.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#333333" text-anchor="middle">claimSeats(instance, booking, SORTED labels, BOOKED, null)</text>
+<polyline points="940.0,585.0 1140.0,585.0" fill="none" stroke="#b85450" stroke-width="2" marker-end="url(#arrow-block)"/>
+<text x="1040.0" y="579.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="none" stroke="#ffffff" stroke-width="4" stroke-linejoin="round" text-anchor="middle">INSERT seat_assignment x N   then   entityManager.flush()</text>
+<text x="1040.0" y="579.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#333333" text-anchor="middle">INSERT seat_assignment x N   then   entityManager.flush()</text>
+<polyline points="1140.0,625.0 940.0,625.0" fill="none" stroke="#b85450" stroke-width="1" stroke-dasharray="7 5" marker-end="url(#arrow-open)"/>
+<text x="1040.0" y="619.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="none" stroke="#ffffff" stroke-width="4" stroke-linejoin="round" text-anchor="middle">OK   /   unique violation on ux_seat_active</text>
+<text x="1040.0" y="619.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#333333" text-anchor="middle">OK   /   unique violation on ux_seat_active</text>
+<polyline points="940.0,665.0 510.0,665.0" fill="none" stroke="#999999" stroke-width="1" stroke-dasharray="7 5" marker-end="url(#arrow-open)"/>
+<text x="725.0" y="659.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="none" stroke="#ffffff" stroke-width="4" stroke-linejoin="round" text-anchor="middle">List   /   SeatUnavailableException(details=[12A])</text>
+<text x="725.0" y="659.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#333333" text-anchor="middle">List   /   SeatUnavailableException(details=[12A])</text>
+<polyline points="510.0,730.0 300.0,730.0" fill="none" stroke="#999999" stroke-width="1" stroke-dasharray="7 5" marker-end="url(#arrow-open)"/>
+<text x="405.0" y="724.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="none" stroke="#ffffff" stroke-width="4" stroke-linejoin="round" text-anchor="middle">BookingResponse   /   DomainException</text>
+<text x="405.0" y="724.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#333333" text-anchor="middle">BookingResponse   /   DomainException</text>
+<polyline points="300.0,770.0 110.0,770.0" fill="none" stroke="#999999" stroke-width="1" stroke-dasharray="7 5" marker-end="url(#arrow-open)"/>
+<text x="205.0" y="764.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="none" stroke="#ffffff" stroke-width="4" stroke-linejoin="round" text-anchor="middle">201 Created   /   409 SEAT_UNAVAILABLE + details[]</text>
+<text x="205.0" y="764.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#333333" text-anchor="middle">201 Created   /   409 SEAT_UNAVAILABLE + details[]</text>
+<polyline points="1260.0,265.0 610.0,265.0" fill="none" stroke="#82b366" stroke-width="1" stroke-dasharray="7 5"/>
+<polyline points="1260.0,455.0 940.0,545.0" fill="none" stroke="#d79b00" stroke-width="1" stroke-dasharray="7 5"/>
+<polyline points="1260.0,585.0 1140.0,585.0" fill="none" stroke="#b85450" stroke-width="1" stroke-dasharray="7 5"/>
+</svg>

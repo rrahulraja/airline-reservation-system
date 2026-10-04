@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1124" height="719" viewBox="0 0 1124 719">
+<defs>
+<marker id="arrow-block" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"/></marker>
+<marker id="arrow-open" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10" fill="none" stroke="context-stroke" stroke-width="1.5"/></marker>
+</defs>
+<rect width="1124" height="719" fill="#ffffff"/>
+<text x="48.0" y="40.9" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="18.0" fill="#111111" text-anchor="start" font-weight="bold">Booking Lifecycle — States and Seat Inventory Effects</text>
+<text x="48.0" y="59.6" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="11.0" fill="#555555" text-anchor="start">A hold is a booking in HELD status, not a separate entity — one table, one lifecycle, and confirm and cancel operate uniformly on both.</text>
+<ellipse cx="95.0" cy="265.0" rx="15.0" ry="15.0" fill="#333333" stroke="none" stroke-width="1" opacity="1.0"/>
+<rect x="300.0" y="130.0" width="180.0" height="80.0" rx="8" fill="#fff2cc" stroke="#d6b656" stroke-width="2" opacity="1.0"/>
+<text x="390.0" y="157.7" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle" font-weight="bold">HELD</text>
+<text x="390.0" y="173.9" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle" font-weight="bold">hold_expires_at set</text>
+<text x="390.0" y="190.1" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle" font-weight="bold">seats status = HELD</text>
+<rect x="620.0" y="245.0" width="180.0" height="80.0" rx="8" fill="#d5e8d4" stroke="#82b366" stroke-width="2" opacity="1.0"/>
+<text x="710.0" y="272.7" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle" font-weight="bold">CONFIRMED</text>
+<text x="710.0" y="288.9" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle" font-weight="bold">hold_expires_at = NULL</text>
+<text x="710.0" y="305.1" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle" font-weight="bold">seats status = BOOKED</text>
+<rect x="900.0" y="130.0" width="200.0" height="80.0" rx="8" fill="#f8cecc" stroke="#b85450" stroke-width="2" opacity="1.0"/>
+<text x="1000.0" y="149.6" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle" font-weight="bold">CANCELLED</text>
+<text x="1000.0" y="165.8" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle" font-weight="bold">seat_assignment rows</text>
+<text x="1000.0" y="182.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle" font-weight="bold">DELETED</text>
+<text x="1000.0" y="198.2" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle" font-weight="bold">passenger rows retained</text>
+<rect x="900.0" y="400.0" width="200.0" height="80.0" rx="8" fill="#f5f5f5" stroke="#666666" stroke-width="2" opacity="1.0"/>
+<text x="1000.0" y="419.6" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle" font-weight="bold">EXPIRED</text>
+<text x="1000.0" y="435.8" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle" font-weight="bold">seat_assignment rows</text>
+<text x="1000.0" y="452.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle" font-weight="bold">DELETED</text>
+<text x="1000.0" y="468.2" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle" font-weight="bold">passenger rows retained</text>
+<rect x="300.0" y="520.0" width="330.0" height="175.0" rx="0" fill="#f8cecc" stroke="#b85450" stroke-width="1" opacity="1.0"/>
+<text x="308.0" y="534.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">Rejected transitions</text>
+<text x="308.0" y="561.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">confirm from CONFIRMED · CANCELLED · EXPIRED</text>
+<text x="308.0" y="574.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">409 BOOKING_NOT_CONFIRMABLE</text>
+<text x="308.0" y="601.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">confirm when hold_expires_at has lapsed</text>
+<text x="308.0" y="615.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">409 HOLD_EXPIRED</text>
+<text x="308.0" y="642.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">cancel from CANCELLED · EXPIRED</text>
+<text x="308.0" y="655.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">409 BOOKING_NOT_CANCELLABLE</text>
+<text x="308.0" y="682.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">Chosen over a silently idempotent 200 so a client</text>
+<text x="308.0" y="696.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">learns its view of the booking is stale.</text>
+<rect x="660.0" y="520.0" width="440.0" height="140.0" rx="0" fill="#d5e8d4" stroke="#82b366" stroke-width="2" opacity="1.0"/>
+<text x="668.0" y="534.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">Why HELD to CONFIRMED is an UPDATE, never delete-then-insert</text>
+<text x="668.0" y="561.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">ux_seat_active covers both HELD and BOOKED, so updating the</text>
+<text x="668.0" y="574.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">existing rows in place means the seat is never momentarily free.</text>
+<text x="668.0" y="588.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">Delete-then-insert opens a window in which a competing booking</text>
+<text x="668.0" y="601.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">can take the seat between the two statements.</text>
+<text x="668.0" y="628.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">The test asserts the seat_assignment row ids are unchanged</text>
+<text x="668.0" y="642.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">across the flip, precisely to catch this.</text>
+<rect x="660.0" y="370.0" width="210.0" height="140.0" rx="0" fill="#fff2cc" stroke="#d6b656" stroke-width="1" opacity="1.0"/>
+<text x="668.0" y="384.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">The sweep is cleanup, not</text>
+<text x="668.0" y="397.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">correctness</text>
+<text x="668.0" y="411.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">A lapsed hold already reads as</text>
+<text x="668.0" y="424.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">free: search</text>
+<text x="668.0" y="438.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">counts only rows with expires_at &gt;</text>
+<text x="668.0" y="451.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">now(), and</text>
+<text x="668.0" y="465.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">the booking path purges lapsed</text>
+<text x="668.0" y="478.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">holds inside its</text>
+<text x="668.0" y="492.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">own transaction. A seat is</text>
+<text x="668.0" y="505.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">rebookable the</text>
+<text x="668.0" y="519.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">instant its hold lapses, whether or</text>
+<text x="668.0" y="532.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">not the job</text>
+<text x="668.0" y="546.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">has ever run.</text>
+<rect x="40.0" y="130.0" width="230.0" height="90.0" rx="0" fill="#f5f5f5" stroke="#999999" stroke-width="1" opacity="1.0" stroke-dasharray="8 6"/>
+<text x="48.0" y="144.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">Removable by design</text>
+<text x="48.0" y="157.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">If time runs short, deleting the HELD</text>
+<text x="48.0" y="171.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">state, the two</text>
+<text x="48.0" y="184.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">hold endpoints and the sweep job</text>
+<text x="48.0" y="198.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">leaves the rest of</text>
+<text x="48.0" y="211.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">the model untouched — no schema</text>
+<text x="48.0" y="225.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">change, no rewrite.</text>
+<polyline points="110.0,265.0 205.0,265.0 205.0,170.0 300.0,170.0" fill="none" stroke="#d6b656" stroke-width="2" marker-end="url(#arrow-block)"/>
+<text x="205.0" y="199.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="none" stroke="#ffffff" stroke-width="4" stroke-linejoin="round" text-anchor="middle">POST /api/bookings/holds</text>
+<text x="205.0" y="199.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#333333" text-anchor="middle">POST /api/bookings/holds</text>
+<text x="205.0" y="211.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="none" stroke="#ffffff" stroke-width="4" stroke-linejoin="round" text-anchor="middle">claimSeats(..., HELD, now + ttl)</text>
+<text x="205.0" y="211.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#333333" text-anchor="middle">claimSeats(..., HELD, now + ttl)</text>
+<polyline points="110.0,265.0 95.0,285.0 400.0,285.0 620.0,285.0" fill="none" stroke="#82b366" stroke-width="2" marker-end="url(#arrow-block)"/>
+<text x="247.5" y="267.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="none" stroke="#ffffff" stroke-width="4" stroke-linejoin="round" text-anchor="middle">POST /api/bookings</text>
+<text x="247.5" y="267.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#333333" text-anchor="middle">POST /api/bookings</text>
+<text x="247.5" y="279.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="none" stroke="#ffffff" stroke-width="4" stroke-linejoin="round" text-anchor="middle">claimSeats(..., BOOKED, null)</text>
+<text x="247.5" y="279.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#333333" text-anchor="middle">claimSeats(..., BOOKED, null)</text>
+<polyline points="480.0,170.0 550.0,170.0 550.0,285.0 620.0,285.0" fill="none" stroke="#82b366" stroke-width="2" marker-end="url(#arrow-block)"/>
+<text x="550.0" y="209.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="none" stroke="#ffffff" stroke-width="4" stroke-linejoin="round" text-anchor="middle">POST /{pnr}/confirm</text>
+<text x="550.0" y="209.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#333333" text-anchor="middle">POST /{pnr}/confirm</text>
+<text x="550.0" y="221.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="none" stroke="#ffffff" stroke-width="4" stroke-linejoin="round" text-anchor="middle">in-place UPDATE of the same rows</text>
+<text x="550.0" y="221.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#333333" text-anchor="middle">in-place UPDATE of the same rows</text>
+<polyline points="480.0,170.0 900.0,170.0" fill="none" stroke="#b85450" stroke-width="2" marker-end="url(#arrow-block)"/>
+<text x="690.0" y="164.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="none" stroke="#ffffff" stroke-width="4" stroke-linejoin="round" text-anchor="middle">POST /{pnr}/cancel</text>
+<text x="690.0" y="164.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#333333" text-anchor="middle">POST /{pnr}/cancel</text>
+<polyline points="800.0,285.0 850.0,285.0 850.0,170.0 900.0,170.0" fill="none" stroke="#b85450" stroke-width="2" marker-end="url(#arrow-block)"/>
+<text x="850.0" y="221.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="none" stroke="#ffffff" stroke-width="4" stroke-linejoin="round" text-anchor="middle">POST /{pnr}/cancel</text>
+<text x="850.0" y="221.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#333333" text-anchor="middle">POST /{pnr}/cancel</text>
+<polyline points="480.0,170.0 390.0,440.0 900.0,440.0" fill="none" stroke="#666666" stroke-width="2" stroke-dasharray="7 5" marker-end="url(#arrow-block)"/>
+<text x="390.0" y="422.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="none" stroke="#ffffff" stroke-width="4" stroke-linejoin="round" text-anchor="middle">hold_expires_at lapses</text>
+<text x="390.0" y="422.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#333333" text-anchor="middle">hold_expires_at lapses</text>
+<text x="390.0" y="434.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="none" stroke="#ffffff" stroke-width="4" stroke-linejoin="round" text-anchor="middle">HoldExpiryJob.sweep()</text>
+<text x="390.0" y="434.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#333333" text-anchor="middle">HoldExpiryJob.sweep()</text>
+</svg>

@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1464" height="899" viewBox="0 0 1464 899">
+<defs>
+<marker id="arrow-block" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"/></marker>
+<marker id="arrow-open" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10" fill="none" stroke="context-stroke" stroke-width="1.5"/></marker>
+</defs>
+<rect width="1464" height="899" fill="#ffffff"/>
+<text x="48.0" y="40.9" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="18.0" fill="#111111" text-anchor="start" font-weight="bold">Concurrency — Two Customers, One Seat</text>
+<text x="48.0" y="59.6" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="11.0" fill="#555555" text-anchor="start">Both transactions reach the INSERT. The partial unique index decides the winner — no row lock is taken on this path.</text>
+<rect x="30.0" y="90.0" width="150.0" height="40.0" rx="4" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<line x1="105.0" y1="130.0" x2="105.0" y2="730.0" stroke="#666666" stroke-width="1" stroke-dasharray="6 5"/>
+<text x="105.0" y="113.9" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle">Customer A</text>
+<rect x="215.0" y="90.0" width="150.0" height="40.0" rx="4" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<line x1="290.0" y1="130.0" x2="290.0" y2="730.0" stroke="#666666" stroke-width="1" stroke-dasharray="6 5"/>
+<text x="290.0" y="113.9" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle">Customer B</text>
+<rect x="420.0" y="90.0" width="170.0" height="45.0" rx="4" fill="#d5e8d4" stroke="#82b366" stroke-width="1"/>
+<line x1="505.0" y1="135.0" x2="505.0" y2="730.0" stroke="#82b366" stroke-width="1" stroke-dasharray="6 5"/>
+<text x="505.0" y="108.3" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle">Transaction A</text>
+<text x="505.0" y="124.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle">BookingService</text>
+<rect x="640.0" y="90.0" width="170.0" height="45.0" rx="4" fill="#d5e8d4" stroke="#82b366" stroke-width="1"/>
+<line x1="725.0" y1="135.0" x2="725.0" y2="730.0" stroke="#82b366" stroke-width="1" stroke-dasharray="6 5"/>
+<text x="725.0" y="108.3" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle">Transaction B</text>
+<text x="725.0" y="124.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle">BookingService</text>
+<rect x="900.0" y="90.0" width="170.0" height="45.0" rx="4" fill="#f8cecc" stroke="#b85450" stroke-width="2"/>
+<line x1="985.0" y1="135.0" x2="985.0" y2="730.0" stroke="#b85450" stroke-width="1" stroke-dasharray="6 5"/>
+<text x="985.0" y="108.3" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle">PostgreSQL</text>
+<text x="985.0" y="124.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="12.0" fill="#111111" text-anchor="middle">ux_seat_active</text>
+<rect x="718.0" y="330.0" width="14.0" height="110.0" rx="0" fill="#ffcccc" stroke="#b85450" stroke-width="1" opacity="0.6"/>
+<rect x="1110.0" y="330.0" width="330.0" height="70.0" rx="0" fill="#fff2cc" stroke="#d6b656" stroke-width="1" opacity="1.0"/>
+<text x="1118.0" y="344.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">Transaction B BLOCKS here on the index tuple</text>
+<text x="1118.0" y="357.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">Transaction A holds. No application lock was</text>
+<text x="1118.0" y="371.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">requested — Postgres serializes the two writers</text>
+<text x="1118.0" y="384.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">on the unique index itself.</text>
+<rect x="1110.0" y="430.0" width="330.0" height="200.0" rx="0" fill="#d5e8d4" stroke="#82b366" stroke-width="2" opacity="1.0"/>
+<text x="1118.0" y="444.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">Outcome, asserted by test</text>
+<text x="1118.0" y="471.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">20 threads claiming &#x27;15A&#x27; on one flight:</text>
+<text x="1118.0" y="484.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">· exactly 1 success</text>
+<text x="1118.0" y="498.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">· 19 x SeatUnavailableException to 409</text>
+<text x="1118.0" y="511.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">· exactly 1 seat_assignment row in the table</text>
+<text x="1118.0" y="538.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">20 threads claiming 20 DISTINCT seats:</text>
+<text x="1118.0" y="552.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">· 20 successes, 0 failures</text>
+<text x="1118.0" y="579.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">The second case is what rules out SELECT FOR</text>
+<text x="1118.0" y="592.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">UPDATE: a row-lock design passes the first test</text>
+<text x="1118.0" y="606.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#111111" text-anchor="start">but needlessly queues on the second.</text>
+<rect x="30.0" y="750.0" width="1040.0" height="125.0" rx="0" fill="#fff2cc" stroke="#d6b656" stroke-width="1" opacity="1.0"/>
+<text x="40.0" y="765.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="11.0" fill="#111111" text-anchor="start">Five layers of the concurrency strategy</text>
+<text x="40.0" y="794.7" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="11.0" fill="#111111" text-anchor="start">1. Partial unique index ux_seat_active — unconditional, survives application bugs and horizontal scaling</text>
+<text x="40.0" y="809.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="11.0" fill="#111111" text-anchor="start">2. One transaction per booking, all seats inserted in a single SORTED batch — all or none, no deadlocks</text>
+<text x="40.0" y="824.4" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="11.0" fill="#111111" text-anchor="start">3. Fail-fast conflict mapping to 409 naming the lost seats — losers learn immediately instead of queueing</text>
+<text x="40.0" y="839.2" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="11.0" fill="#111111" text-anchor="start">4. resolveOrCreate via ON CONFLICT DO NOTHING — concurrent first-bookers converge on one instance, lock-free</text>
+<text x="40.0" y="854.1" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="11.0" fill="#111111" text-anchor="start">5. @Version on booking and flight_instance — guards status transitions (confirm, cancel) against lost updates</text>
+<polyline points="105.0,165.0 505.0,165.0" fill="none" stroke="#333333" stroke-width="1" marker-end="url(#arrow-block)"/>
+<text x="305.0" y="159.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="none" stroke="#ffffff" stroke-width="4" stroke-linejoin="round" text-anchor="middle">POST /api/bookings  seats=[15A]</text>
+<text x="305.0" y="159.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#333333" text-anchor="middle">POST /api/bookings  seats=[15A]</text>
+<polyline points="290.0,205.0 725.0,205.0" fill="none" stroke="#333333" stroke-width="1" marker-end="url(#arrow-block)"/>
+<text x="507.5" y="199.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="none" stroke="#ffffff" stroke-width="4" stroke-linejoin="round" text-anchor="middle">POST /api/bookings  seats=[15A]   (same instant)</text>
+<text x="507.5" y="199.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#333333" text-anchor="middle">POST /api/bookings  seats=[15A]   (same instant)</text>
+<polyline points="505.0,265.0 985.0,265.0" fill="none" stroke="#82b366" stroke-width="2" marker-end="url(#arrow-block)"/>
+<text x="745.0" y="259.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="none" stroke="#ffffff" stroke-width="4" stroke-linejoin="round" text-anchor="middle">INSERT seat_assignment (instance, &#x27;15A&#x27;) + flush()</text>
+<text x="745.0" y="259.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#333333" text-anchor="middle">INSERT seat_assignment (instance, &#x27;15A&#x27;) + flush()</text>
+<polyline points="725.0,325.0 985.0,325.0" fill="none" stroke="#b85450" stroke-width="2" marker-end="url(#arrow-block)"/>
+<text x="855.0" y="319.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="none" stroke="#ffffff" stroke-width="4" stroke-linejoin="round" text-anchor="middle">INSERT seat_assignment (instance, &#x27;15A&#x27;) + flush()</text>
+<text x="855.0" y="319.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#333333" text-anchor="middle">INSERT seat_assignment (instance, &#x27;15A&#x27;) + flush()</text>
+<polyline points="505.0,460.0 985.0,460.0" fill="none" stroke="#82b366" stroke-width="2" marker-end="url(#arrow-block)"/>
+<text x="745.0" y="454.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="none" stroke="#ffffff" stroke-width="4" stroke-linejoin="round" text-anchor="middle">COMMIT</text>
+<text x="745.0" y="454.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#333333" text-anchor="middle">COMMIT</text>
+<polyline points="985.0,510.0 725.0,510.0" fill="none" stroke="#b85450" stroke-width="2" stroke-dasharray="7 5" marker-end="url(#arrow-open)"/>
+<text x="855.0" y="504.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="none" stroke="#ffffff" stroke-width="4" stroke-linejoin="round" text-anchor="middle">ERROR 23505  duplicate key value violates unique constraint &#x27;ux_seat_active&#x27;</text>
+<text x="855.0" y="504.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#333333" text-anchor="middle">ERROR 23505  duplicate key value violates unique constraint &#x27;ux_seat_active&#x27;</text>
+<polyline points="725.0,555.0 985.0,555.0" fill="none" stroke="#b85450" stroke-width="1" stroke-dasharray="7 5" marker-end="url(#arrow-block)"/>
+<text x="855.0" y="549.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="none" stroke="#ffffff" stroke-width="4" stroke-linejoin="round" text-anchor="middle">ROLLBACK — no booking, no passenger, no seat rows</text>
+<text x="855.0" y="549.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#333333" text-anchor="middle">ROLLBACK — no booking, no passenger, no seat rows</text>
+<polyline points="505.0,615.0 105.0,615.0" fill="none" stroke="#82b366" stroke-width="2" stroke-dasharray="7 5" marker-end="url(#arrow-open)"/>
+<text x="305.0" y="609.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="none" stroke="#ffffff" stroke-width="4" stroke-linejoin="round" text-anchor="middle">201 Created   pnr=7KQ4XZ  seats=[15A]</text>
+<text x="305.0" y="609.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#333333" text-anchor="middle">201 Created   pnr=7KQ4XZ  seats=[15A]</text>
+<polyline points="725.0,665.0 290.0,665.0" fill="none" stroke="#b85450" stroke-width="2" stroke-dasharray="7 5" marker-end="url(#arrow-open)"/>
+<text x="507.5" y="659.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="none" stroke="#ffffff" stroke-width="4" stroke-linejoin="round" text-anchor="middle">409 SEAT_UNAVAILABLE   details=[&#x27;15A&#x27;]</text>
+<text x="507.5" y="659.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10.0" fill="#333333" text-anchor="middle">409 SEAT_UNAVAILABLE   details=[&#x27;15A&#x27;]</text>
+</svg>

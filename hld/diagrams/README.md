@@ -15,17 +15,32 @@ Source files are draw.io / diagrams.net XML (`.drawio`). Open them with any of:
 | `04-concurrent-booking.drawio` | Two customers claiming one seat: both reach the INSERT, the index decides, one gets 201 and one gets 409. Includes the five concurrency layers. |
 | `05-booking-state-machine.drawio` | The `HELD` / `CONFIRMED` / `CANCELLED` / `EXPIRED` lifecycle, each transition's effect on seat inventory, and every rejected transition with its error code. |
 
-## Exporting to PNG or PDF
+## Generated images
 
-No draw.io CLI is installed in this environment, so export is a manual step:
+Each diagram ships as three files:
 
-1. Open the file in diagrams.net or draw.io Desktop.
-2. **File > Export as > PNG**, with *Transparent Background* off and *Zoom* 200%
-   for a crisp image in the HLD.
-3. Save beside the source as `NN-name.png`.
+| Extension | Role |
+|---|---|
+| `.drawio` | The editable source of truth. Edit this. |
+| `.svg` | Generated. Vector, scales cleanly, good for the HLD on screen. |
+| `.png` | Generated at 2x. Embedded in `hld/architecture.md` and in the PDF export. |
 
-`hld/architecture.md` references the PNG exports. Keep the `.drawio` files as the
-editable source of truth and re-export after any change.
+**Regenerate after editing any `.drawio`:**
+
+```bash
+pip install cairosvg
+python3 hld/diagrams/render.py
+```
+
+`render.py` parses the mxGraph XML and emits SVG, then rasterizes with cairosvg. It
+covers the subset of mxGraph these diagrams use — rectangles, ellipses, cylinders,
+UML lifelines, text blocks, and edges with block or open arrowheads — and is
+deliberately not a general mxGraph renderer.
+
+Generating the images rather than exporting by hand means they cannot silently drift
+from the source, and anyone cloning the repo can rebuild them without installing
+draw.io. If you prefer draw.io's own rendering, **File > Export as > PNG** at 200%
+zoom produces an equivalent file; just overwrite the generated one.
 
 For `hld/architecture.pdf` (the brief asks for a PDF), export the whole Markdown
 document once at the end rather than after each edit.
