@@ -2,6 +2,7 @@ package com.airline.booking.booking;
 
 import com.airline.booking.booking.dto.BookingResponse;
 import com.airline.booking.booking.dto.CreateBookingRequest;
+import com.airline.booking.booking.dto.CreateHoldRequest;
 import com.airline.booking.security.AuthenticatedUser;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -19,9 +20,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class BookingController {
 
     private final BookingService bookingService;
+    private final HoldService holdService;
 
-    public BookingController(BookingService bookingService) {
+    public BookingController(BookingService bookingService, HoldService holdService) {
         this.bookingService = bookingService;
+        this.holdService = holdService;
     }
 
     /**
@@ -47,5 +50,21 @@ public class BookingController {
     @PostMapping("/{pnr}/cancel")
     public BookingResponse cancel(@PathVariable String pnr) {
         return bookingService.cancel(pnr);
+    }
+
+    /**
+     * Two-phase alternative to POST /api/bookings. Both share one seat-claim primitive, so
+     * one concurrency proof covers both.
+     */
+    @PostMapping("/holds")
+    @ResponseStatus(HttpStatus.CREATED)
+    public BookingResponse hold(@Valid @RequestBody CreateHoldRequest request,
+                                @AuthenticationPrincipal AuthenticatedUser user) {
+        return holdService.hold(request, user == null ? null : user.userId());
+    }
+
+    @PostMapping("/{pnr}/confirm")
+    public BookingResponse confirm(@PathVariable String pnr) {
+        return holdService.confirm(pnr);
     }
 }

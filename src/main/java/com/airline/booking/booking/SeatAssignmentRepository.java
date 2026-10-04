@@ -33,4 +33,15 @@ public interface SeatAssignmentRepository extends JpaRepository<SeatAssignment, 
     @Modifying(clearAutomatically = true, flushAutomatically = true)
     @Query("DELETE FROM SeatAssignment sa WHERE sa.booking.id = :bookingId")
     int deleteByBookingId(@Param("bookingId") long bookingId);
+
+    /**
+     * Releases the inventory of several bookings in one statement, for the expiry sweep.
+     *
+     * <p>One statement rather than a loop matters here beyond efficiency: every call
+     * carries clearAutomatically, which detaches the whole persistence context, so a loop
+     * would detach the Booking entities the sweep still needs to update.
+     */
+    @Modifying(clearAutomatically = true, flushAutomatically = true)
+    @Query("DELETE FROM SeatAssignment sa WHERE sa.booking.id IN :bookingIds")
+    int deleteByBookingIdIn(@Param("bookingIds") java.util.Collection<Long> bookingIds);
 }

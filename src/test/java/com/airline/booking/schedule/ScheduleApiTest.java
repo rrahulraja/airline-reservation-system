@@ -2,11 +2,13 @@ package com.airline.booking.schedule;
 
 import com.airline.booking.support.AbstractIntegrationTest;
 import com.airline.booking.support.TokenFactory;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.http.MediaType;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDate;
@@ -34,6 +36,20 @@ class ScheduleApiTest extends AbstractIntegrationTest {
 
     @Autowired
     private TokenFactory tokens;
+
+    @Autowired
+    private JdbcTemplate jdbc;
+
+    /**
+     * These tests commit, because MockMvc requests run in their own transactions. Without
+     * this cleanup the schedules created here stay visible to every later test, and
+     * FlightSearchTest's "this route does not fly on Tuesday" assertion starts finding a
+     * ZZ-numbered schedule that this class created.
+     */
+    @AfterEach
+    void removeSchedulesCreatedHere() {
+        jdbc.update("DELETE FROM flight_schedule WHERE flight_number LIKE 'ZZ%'");
+    }
 
     @Test
     @DisplayName("creating a schedule returns 201 and is readable by id")
