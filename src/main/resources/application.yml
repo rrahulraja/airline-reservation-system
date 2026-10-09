@@ -21,6 +21,12 @@ spring:
         jdbc:
           time_zone: UTC
           batch_size: 32
+        type:
+          # Read and write java.time values with getObject/setObject instead of the
+          # legacy java.sql.Time + Calendar path. Without it, jdbc.time_zone shifts
+          # LocalTime columns (schedule departure/arrival TIME) by the JVM's offset
+          # whenever the JVM is not on UTC: 09:30 reads back as 15:00 on IST.
+          java_time_use_direct_jdbc: true
         order_inserts: true
         order_updates: true
 

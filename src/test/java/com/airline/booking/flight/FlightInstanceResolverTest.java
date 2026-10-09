@@ -14,6 +14,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.ZoneOffset;
 import java.time.temporal.TemporalAdjusters;
+import java.util.TimeZone;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -59,6 +60,28 @@ class FlightInstanceResolverTest extends AbstractIntegrationTest {
         assertThat(instance.getDepartureAt()).isEqualTo(date.atTime(9, 30).toInstant(ZoneOffset.UTC));
         assertThat(instance.getArrivalAt()).isEqualTo(date.atTime(13, 45).toInstant(ZoneOffset.UTC));
         assertThat(instance.getStatus()).isEqualTo("SCHEDULED");
+    }
+
+    @Test
+    @DisplayName("instance times do not depend on the JVM's default timezone")
+    void timesIgnoreJvmTimezone() {
+        LocalDate date = nextWeekday(DayOfWeek.WEDNESDAY);
+        TimeZone original = TimeZone.getDefault();
+        try {
+            // IST, +05:30. Before java_time_use_direct_jdbc, the schedule's 09:30 TIME
+            // column read back as 15:00 here and the instance departed at 15:00Z.
+            TimeZone.setDefault(TimeZone.getTimeZone("Asia/Kolkata"));
+
+            var instance = transactionTemplate.execute(s ->
+                    resolver.resolveOrCreate(schedule("XY101"), date));
+
+            assertThat(instance.getDepartureAt())
+                    .isEqualTo(date.atTime(9, 30).toInstant(ZoneOffset.UTC));
+            assertThat(instance.getArrivalAt())
+                    .isEqualTo(date.atTime(13, 45).toInstant(ZoneOffset.UTC));
+        } finally {
+            TimeZone.setDefault(original);
+        }
     }
 
     @Test

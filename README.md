@@ -6,7 +6,7 @@ search, seat inventory, booking, holds and cancellation.
 **Stack:** Java 21 · Spring Boot 3.5 · PostgreSQL 16 · Flyway · Spring Data JPA ·
 Spring Security (JWT) · Maven · JUnit 5 · Testcontainers
 
-**Status:** 127 tests, all passing. The concurrency suite has been run ten consecutive
+**Status:** 128 tests, all passing. The concurrency suite has been run ten consecutive
 times with zero failures (§ Concurrency evidence).
 
 ---
@@ -279,7 +279,7 @@ PASS: exactly one booking won the seat; 19 lost cleanly with 409.
 Full suite:
 
 ```
-[INFO] Tests run: 127, Failures: 0, Errors: 0, Skipped: 0
+[INFO] Tests run: 128, Failures: 0, Errors: 0, Skipped: 0
 ```
 
 ---
